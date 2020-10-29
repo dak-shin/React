@@ -1,16 +1,8 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Media } from 'reactstrap';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
 
-class DishDetail extends Component{
-
-	constructor(props)
-	{
-		super(props);
-
-	}
-
-	renderComments(dishes_comments){
+	function RenderComments({dishes_comments}){
     	if (dishes_comments != null){
 	    	const comms = dishes_comments.map((item) => {
 		    	  	return(	
@@ -34,25 +26,26 @@ class DishDetail extends Component{
         else
             return(<div></div>);
     }
-    renderDishDeets(dish_sel)
+
+    function RenderDishDeets({dish_sel})
     {
     	return(
 			<Card className="col-12 col-md-5 m-1">
-                <CardImg top src={this.props.dish_sel.image} alt={this.props.dish_sel.name} />
+                <CardImg top src={dish_sel.image} alt={dish_sel.name} />
                 <CardBody>
-                  <CardTitle>{this.props.dish_sel.name}</CardTitle>
-                  <CardText>{this.props.dish_sel.description}</CardText>
+                  <CardTitle>{dish_sel.name}</CardTitle>
+                  <CardText>{dish_sel.description}</CardText>
                 </CardBody>
             </Card>
     	);
     }
 
-	render(){
+	const DishDetail = (props) => {
 		var res = '';
 		var dish_card = '';
-   		if (this.props.dish_sel != null){
-     		res = this.renderComments(this.props.dish_sel.comments);
-        	dish_card = this.renderDishDeets(this.props.dish_sel);
+   		if (props.dish_sel != null){
+     		res = <RenderComments dishes_comments = {props.dish_sel.comments}/>;
+        	dish_card = <RenderDishDeets dish_sel = {props.dish_sel}/>;
         }
 		return(
 			<div className="container">
@@ -63,6 +56,6 @@ class DishDetail extends Component{
 		    </div>
 		);
 	}
-}
+
 
 export default DishDetail;
