@@ -5,7 +5,6 @@ import { Card, CardImg, CardImgOverlay, CardText, CardBody,CardTitle } from 'rea
 
 function RenderMenuItem({ dish, onClick}){
   return(
-
       <Card key={dish.id}
         onClick={() => onClick(dish.id)}>
         <CardImg width="100%" src={dish.image} alt={dish.name} />
@@ -15,6 +14,7 @@ function RenderMenuItem({ dish, onClick}){
       </Card>
 
     );
+
 }
 
 const Menu = (props) => {
