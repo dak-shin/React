@@ -10,6 +10,7 @@ import Contact from './ContactComponent';
 import { COMMENTS } from '../shared/comments';
 import { LEADERS } from '../shared/leaders';
 import { PROMOTIONS } from '../shared/promotions';
+import About from './AboutComponent.js';
 
 class Main extends Component{
 
@@ -45,6 +46,7 @@ class Main extends Component{
         <div >
         <Header />
           <Switch>
+              <Route path='/about' component={() => <About leaders={this.state.leaders} />} />
               <Route path='/home' component={HomePage} />
               <Route exact path='/menu' component={() => <Menu dishes={this.state.dishes} />} />
               <Route path='/menu/:dishId' component={DishWithId} />

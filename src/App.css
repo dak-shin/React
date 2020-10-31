@@ -15,13 +15,13 @@
     margin:0px auto;
     padding: 20px 0px 20px 0px;
 }
-.jumbotron {
+
+#mofo{
     padding:70px 30px 70px 30px;
     margin:0px auto;
-    background-color: #9575CD ;
+    background-color: #9575CD;
     color:floralwhite;
 }
-
 address{
     font-size:80%;
     margin:0px;
@@ -31,3 +31,5 @@ address{
 .navbar-dark {
     background-color: #512DA8;
 }
+
+

@@ -36,7 +36,7 @@ class Header extends Component
 		             				</NavLink>
 		             			</NavItem>
 		             			<NavItem>
-		             				<NavLink className="nav-link"  to="/aboutus">
+		             				<NavLink className="nav-link"  to="/about">
 		             					<span className="fa fa-info fa-lg"></span> About Us
 		             				</NavLink>
 		             			</NavItem>
@@ -54,7 +54,7 @@ class Header extends Component
 		             	</Collapse>
             		</div>
           		</Navbar>
-          		<Jumbotron>
+          		<Jumbotron id="mofo">
           			<div className="container">
                			<div className="row row-header">
 		                   	<div className="col-12 col-sm-6">
