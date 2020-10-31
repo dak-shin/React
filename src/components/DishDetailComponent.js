@@ -1,6 +1,7 @@
 import React from 'react';
 import { Media } from 'reactstrap';
-import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 'reactstrap';
+import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 	function RenderComments({dishes_comments}){
     	if (dishes_comments != null){
@@ -27,31 +28,41 @@ import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle } from 're
             return(<div></div>);
     }
 
-    function RenderDishDeets({dish_sel})
+    function RenderDishDeets({dish})
     {
     	return(
 			<Card className="col-12 col-md-5 m-1">
-                <CardImg top src={dish_sel.image} alt={dish_sel.name} />
+                <CardImg top src={dish.image} alt={dish.name} />
                 <CardBody>
-                  <CardTitle>{dish_sel.name}</CardTitle>
-                  <CardText>{dish_sel.description}</CardText>
+                  <CardTitle>{dish.name}</CardTitle>
+                  <CardText>{dish.description}</CardText>
                 </CardBody>
             </Card>
     	);
     }
 
 	const DishDetail = (props) => {
-		var res = '';
+		var comments_part = '';
 		var dish_card = '';
-   		if (props.dish_sel != null){
-     		res = <RenderComments dishes_comments = {props.dish_sel.comments}/>;
-        	dish_card = <RenderDishDeets dish_sel = {props.dish_sel}/>;
+   		if (props.dish != null){
+     		comments_part = <RenderComments dishes_comments = {props.dish.comments}/>;
+        	dish_card = <RenderDishDeets dish = {props.dish}/>;
         }
 		return(
 			<div className="container">
 				<div className="row">
+                    <Breadcrumb>
+                        <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
+                        <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+                    </Breadcrumb>
+                    <div className="col-12">
+                        <h3>{props.dish.name}</h3>
+                        <hr />
+                    </div>                
+                </div>
+				<div className="row">
 					{dish_card}
-		            {res}
+		            {comments_part}
 		        </div>
 		    </div>
 		);
