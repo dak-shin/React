@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 
 	function RenderComments({dishes_comments}){
     	if (dishes_comments != null){
+			console.log('Dish comments invoked');
 	    	const comms = dishes_comments.map((item) => {
 		    	  	return(	
 		    	  		<li>
@@ -45,7 +46,7 @@ import { Link } from 'react-router-dom';
 		var comments_part = '';
 		var dish_card = '';
    		if (props.dish != null){
-     		comments_part = <RenderComments dishes_comments = {props.dish.comments}/>;
+     		comments_part = <RenderComments dishes_comments = {props.comments}/>;
         	dish_card = <RenderDishDeets dish = {props.dish}/>;
         }
 		return(
