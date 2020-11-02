@@ -2,6 +2,7 @@ import React from 'react';
 import { Media } from 'reactstrap';
 import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import CommentForm from './CommentFormComponent.js';
 
 	function RenderComments({dishes_comments}){
     	if (dishes_comments != null){
@@ -21,6 +22,7 @@ import { Link } from 'react-router-dom';
 		            	<h4>Comments</h4>
 		            	<ul className="list-unstyled">
 		            		{comms}
+							<CommentForm />
 		            	</ul>
 		            </div>
 	            );
@@ -68,6 +70,7 @@ import { Link } from 'react-router-dom';
 		    </div>
 		);
 	}
+
 
 
 export default DishDetail;
