@@ -4,6 +4,7 @@ import { Card, CardImg, CardImgOverlay, CardText, CardBody, CardTitle, Breadcrum
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
 import {Modal, ModalBody, ModalHeader, Button, Col, Row, Label } from 'reactstrap';
+import { Loading } from './LoadingComponent';
 
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
@@ -51,7 +52,26 @@ const minLength = (len) => (val) => val && (val.length >= len);
 	const DishDetail = (props) => {
 		var comments_part = '';
 		var dish_card = '';
-   		if (props.dish != null){
+
+		if (props.isLoading) {
+            return(
+                <div className="container">
+                    <div className="row">            
+                        <Loading />
+                    </div>
+                </div>
+            );
+        }
+        else if (props.errMess) {
+            return(
+                <div className="container">
+                    <div className="row">            
+                        <h4>{props.errMess}</h4>
+                    </div>
+                </div>
+            );
+        }
+   		else if (props.dish != null){
      		comments_part = <RenderComments dishes_comments = {props.comments} addComment={props.addComment} dishId={props.dish.id}/>;
         	dish_card = <RenderDishDeets dish = {props.dish}/>;
         }
