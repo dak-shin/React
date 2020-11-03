@@ -8,7 +8,7 @@ import {Modal, ModalBody, ModalHeader, Button, Col, Row, Label } from 'reactstra
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
 
-	function RenderComments({dishes_comments}){
+	function RenderComments({dishes_comments, addComment, dishId}){
     	if (dishes_comments != null){
 			console.log('Dish comments invoked');
 	    	const comms = dishes_comments.map((item) => {
@@ -26,7 +26,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
 		            	<h4>Comments</h4>
 		            	<ul className="list-unstyled">
 		            		{comms}
-							<CommentForm />
+							<CommentForm dishId={dishId} addComment={addComment}/>
 		            	</ul>
 		            </div>
 	            );
@@ -52,7 +52,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
 		var comments_part = '';
 		var dish_card = '';
    		if (props.dish != null){
-     		comments_part = <RenderComments dishes_comments = {props.comments}/>;
+     		comments_part = <RenderComments dishes_comments = {props.comments} addComment={props.addComment} dishId={props.dish.id}/>;
         	dish_card = <RenderDishDeets dish = {props.dish}/>;
         }
 		return(
@@ -89,8 +89,9 @@ class CommentForm extends Component{
 	}
 
 	handleCommentSubmit(values){
-		console.log('Current State is: ' + JSON.stringify(values));
-		alert('Current State is: ' + JSON.stringify(values));
+		this.toggleCommentModal();
+		//alert(JSON.stringify(values));
+        this.props.addComment(this.props.dishId, values.rating, values.name, values.comment);
 	}
 
 	toggleCommentModal(){
@@ -123,7 +124,7 @@ class CommentForm extends Component{
 								</Col>
 							</Row>
 							<Row className="form-group">
-								<Label htmlFor="firstname" md={6}>Your Name</Label>
+								<Label htmlFor="name" md={6}>Your Name</Label>
 								<Col md={12}>
 									<Control.text model=".name" id="name" name="name"
 										placeholder="Name"
