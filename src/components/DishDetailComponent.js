@@ -6,6 +6,7 @@ import { Control, LocalForm, Errors } from 'react-redux-form';
 import {Modal, ModalBody, ModalHeader, Button, Col, Row, Label } from 'reactstrap';
 import { Loading } from './LoadingComponent';
 import { baseUrl } from '../shared/baseUrl';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
@@ -15,19 +16,23 @@ const minLength = (len) => (val) => val && (val.length >= len);
 			console.log('Dish comments invoked');
 	    	const comms = dishes_comments.map((item) => {
 		    	  	return(	
-		    	  		<li>
-		    	  			{item.comment}<br/>
-		    	  			--{item.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', 
-		    	  				day: '2-digit'}).format(new Date(Date.parse(item.date)))}<br/><br/>
-		    	  		</li>
+						<Fade in>
+							<li >
+								{item.comment}<br/>
+								--{item.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', 
+									day: '2-digit'}).format(new Date(Date.parse(item.date)))}<br/><br/>
+							</li>
+						</Fade>
 		    	  	);
 	    		}
 	    	  	);
 	            return(
-		            <div className="col-12 col-md-5 m-1">  
+		            <div>  
 		            	<h4>Comments</h4>
 		            	<ul className="list-unstyled">
-		            		{comms}
+							<Stagger in>
+		            			{comms}
+							</Stagger>
 							<CommentForm dishId={dishId} postComment={postComment}/>
 		            	</ul>
 		            </div>
@@ -40,13 +45,15 @@ const minLength = (len) => (val) => val && (val.length >= len);
     function RenderDishDeets({dish})
     {
     	return(
-			<Card className="col-12 col-md-5 m-1">
-                <CardImg top src={baseUrl + dish.image} alt={dish.name} />
-                <CardBody>
-                  <CardTitle>{dish.name}</CardTitle>
-                  <CardText>{dish.description}</CardText>
-                </CardBody>
-            </Card>
+			<FadeTransform in transformProps={{exitTransform: 'scale(0.5) translateY(-50%)'}}>
+				<Card >
+					<CardImg top src={baseUrl + dish.image} alt={dish.name} />
+					<CardBody>
+					<CardTitle>{dish.name}</CardTitle>
+					<CardText>{dish.description}</CardText>
+					</CardBody>
+				</Card>
+			</FadeTransform>
     	);
     }
 
@@ -89,8 +96,12 @@ const minLength = (len) => (val) => val && (val.length >= len);
                     </div>                
                 </div>
 				<div className="row">
-					{dish_card}
-		            {comments_part}
+					<div className="col-12 col-md-5 m-1" >
+						{dish_card}
+					</div>
+					<div className="col-12 col-md-5 m-1">
+			            {comments_part}
+					</div>
 		        </div>
 		    </div>
 		);
