@@ -10,8 +10,8 @@ import { baseUrl } from '../shared/baseUrl';
 const maxLength = (len) => (val) => !(val) || (val.length <= len);
 const minLength = (len) => (val) => val && (val.length >= len);
 
-	function RenderComments({dishes_comments, addComment, dishId}){
-    	if (dishes_comments != null){
+	function RenderComments({dishes_comments, postComment, dishId}) {
+		if (dishes_comments != null){
 			console.log('Dish comments invoked');
 	    	const comms = dishes_comments.map((item) => {
 		    	  	return(	
@@ -28,7 +28,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
 		            	<h4>Comments</h4>
 		            	<ul className="list-unstyled">
 		            		{comms}
-							<CommentForm dishId={dishId} addComment={addComment}/>
+							<CommentForm dishId={dishId} postComment={postComment}/>
 		            	</ul>
 		            </div>
 	            );
@@ -73,7 +73,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
             );
         }
    		else if (props.dish != null){
-     		comments_part = <RenderComments dishes_comments = {props.comments} addComment={props.addComment} dishId={props.dish.id}/>;
+     		comments_part = <RenderComments dishes_comments = {props.comments} postComment={props.postComment} dishId={props.dish.id}/>;
         	dish_card = <RenderDishDeets dish = {props.dish}/>;
         }
 		return(
@@ -112,7 +112,7 @@ class CommentForm extends Component{
 	handleCommentSubmit(values){
 		this.toggleCommentModal();
 		//alert(JSON.stringify(values));
-        this.props.addComment(this.props.dishId, values.rating, values.name, values.comment);
+        this.props.postComment(this.props.dishId, values.rating, values.name, values.comment);
 	}
 
 	toggleCommentModal(){
