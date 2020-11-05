@@ -123,7 +123,7 @@ class CommentForm extends Component{
 	handleCommentSubmit(values){
 		this.toggleCommentModal();
 		//alert(JSON.stringify(values));
-        this.props.postComment(this.props.dishId, values.rating, values.name, values.comment);
+        this.postComment(this.props.dishId, values.rating, values.name, values.comment);
 	}
 
 	toggleCommentModal(){

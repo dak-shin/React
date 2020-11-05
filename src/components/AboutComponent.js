@@ -1,38 +1,45 @@
 import React from 'react';
 import { Breadcrumb, BreadcrumbItem, Card, CardBody, CardHeader, Media } from 'reactstrap';
 import { Link } from 'react-router-dom';
-
+import { baseUrl } from '../shared/baseUrl';
+import { Loading } from './LoadingComponent';
+import { FadeTransform, Fade, Stagger } from 'react-animation-components';
 
 function RenderLeader({leader}){
-     return(
 
-        <Media>
-          <Media left href="#" className="m-4">
-            <Media object src={leader.image} alt={leader.name} />
-          </Media>
-          <Media body>
-            <Media heading>
-              <h2>{leader.name}</h2>
-            </Media>
-                <h5>{leader.designation}</h5>
-                <p>{leader.description}</p>
-          </Media>
-        </Media>
+        return(
+            <div>
+                <Stagger in>
+                    <Fade in>
+                        <Media>
+                            <Media left href="#" className="m-4">
+                                <Media object src={baseUrl + leader.image} alt={leader.name} />
+                            </Media>
+                            <Media body>
+                                <Media heading>
+                                <h2>{leader.name}</h2>
+                                </Media>
+                                    <h5>{leader.designation}</h5>
+                                    <p>{leader.description}</p>
+                            </Media>
+                        </Media>
+                    </Fade>
+                </Stagger>
+            </div>
+        );
+    }
 
-    );
-}
 
 
 function About(props) {
-
+    
     const leaders = props.leaders.map((leader) => {
         return (
             <div>
                 <RenderLeader leader={leader} />
             </div>
         );
-    });
-
+    }); 
     return(
         <div className="container">
             <div className="row">
@@ -95,6 +102,7 @@ function About(props) {
             </div>
         </div>
     );
+    
 }
 
 export default About;    
