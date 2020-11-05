@@ -57,7 +57,7 @@ const minLength = (len) => (val) => val && (val.length >= len);
     	);
     }
 
-	const DishDetail = (props) => {
+export const DishDetail = (props) => {
 		var comments_part = '';
 		var dish_card = '';
 
@@ -123,7 +123,7 @@ class CommentForm extends Component{
 	handleCommentSubmit(values){
 		this.toggleCommentModal();
 		//alert(JSON.stringify(values));
-        this.postComment(this.props.dishId, values.rating, values.name, values.comment);
+        this.props.postComment(this.props.dishId, values.rating, values.name, values.comment);
 	}
 
 	toggleCommentModal(){
