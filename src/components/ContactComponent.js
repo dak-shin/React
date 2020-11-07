@@ -17,24 +17,13 @@ class Contact extends Component{
         super(props);
   
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.alertFB = this.alertFB.bind(this);
         //when do we apply the bind method and not apply the bind method.
     }
 
     handleSubmit(values) {
         //alert('Current State is: ' + JSON.stringify(values));
-        alert(this.props.postFeedback(values.firstname, values.lastname, values.telnum, values.email, values.agree, values.contactType, values.message) );
-        //alert({newFB});
+        this.props.postFeedback(values.firstname, values.lastname, values.telnum, values.email, values.agree, values.contactType, values.message);
         this.props.resetFeedbackForm();
-        //this.alertFB();
-    }
-
-    alertFB(){
-        fetch(baseUrl + 'feedback')
-        .then(response => response.json())
-        .then(response => alert(response[response.length-1] ))
-        .catch(error =>  { console.log('post feedback', error.message);
-        alert('Your feedback could not be posted\nError: '+error.message); })
     }
 
     render(){
